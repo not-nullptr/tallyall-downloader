@@ -1,5 +1,4 @@
 import { JSDOM } from "jsdom";
-import { decode } from "he";
 import fs from "fs";
 import https from "https";
 
@@ -9,7 +8,7 @@ async function downloadFile(url: string) {
         recursive: true,
     });
     if (fs.existsSync(path) && !fs.lstatSync(path).isFile()) return;
-    return new Promise<void>((resolve, reject) => {
+    return new Promise<void>((resolve) => {
         https.get(url, (res) => {
             const filePath = fs.createWriteStream(path);
             res.pipe(filePath);
